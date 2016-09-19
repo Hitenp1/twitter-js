@@ -14,6 +14,7 @@ nunjucks.configure('views', { noCache: true });
 
 //Middleware
 app.use('/', routes);
+app.use(Express.static('public'));
 
 app.use(function middle1(req, res,next){
 	console.log('/is-anybody-in-there');

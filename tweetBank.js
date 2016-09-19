@@ -31,10 +31,10 @@ var getFakeTweet = function() {
   return "Fullstack Academy is " + randArrayEl(awesome_adj) + "! The instructors are just so " + randArrayEl(awesome_adj) + ". #fullstacklove #codedreams";
 };
 
-for (var i = 0; i < 3; i++) {
+for (var i = 0; i < 10; i++) {
   module.exports.add( getFakeName(), getFakeTweet() );
 }
 
-module.exports.add('Sara Sunshine', 'I want cereal!');
-test = module.exports.find(function(item){return item.name === 'Sara Sunshine'});
-console.log(test)
+// module.exports.add('Sara Sunshine', 'I want cereal!');
+// test = module.exports.find(function(item){return item.name === 'Sara Sunshine'});
+// console.log(test)
