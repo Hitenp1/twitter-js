@@ -16,8 +16,8 @@
       <!-- display tweets here -->
       {% for tweet in tweets %}
         <li id='tweet-board'>
-            <p class='tweet-name'>{{tweet.name}}</p>   
             <p class='tweet-content'>{{tweet.content}}</p>
+            <a href="/users/{{tweet.name}}" class='tweet-name'>{{tweet.name}}</a> 
         </li>
       {% endfor %}
       
