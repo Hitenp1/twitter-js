@@ -2,8 +2,10 @@
 var Express = require( 'express' );
 var nunjucks = require('nunjucks');
 var routes = require('./routes/');
+var socketio = require('socket.io');
 
-var app = Express(); // creates an instance of an express application
+// Creates an instance of an express application
+var app = Express();
 
 // Setting up Nunjucks
 nunjucks.configure('views'); // point nunjucks to the proper directory for templates
@@ -12,38 +14,15 @@ app.engine('html', nunjucks.render); // when giving html files to res.render, te
 nunjucks.configure('views', { noCache: true });
 
 
-//Middleware
-app.use('/', routes);
-app.use(Express.static('public'));
-
-app.use(function middle1(req, res,next){
-	console.log('/is-anybody-in-there');
-	next();
-});
-
-app.use('/news', function middle2(req, res, next){
-	console.log('/modernism');
-	console.log(res.statusCode);
-	next();
-});
-
-//Routes
-
-
-// app.get('/', function(req, res, next){
-// 	res.sendStatus(200);
-// });
-
-// app.get('/index', function(req, res, next){
-// 	var people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
-// 	res.render( 'index', {title: 'Hall of Fame', people: people} );
-// });
-
-// app.get('/news', function(req, res, next){
-// 	res.send('Hello World test');
-// });
 
 //Listener
-app.listen(3000, function(){
-	console.log('You have connected')
-});
+var server = app.listen(3000);
+var io = socketio.listen(server);
+
+// Middleware & Routes
+var router = routes(io);
+app.use( '/', router );
+app.use(Express.static('public'));
+
+
+
