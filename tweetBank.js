@@ -3,7 +3,8 @@ var _ = require('lodash');
 var data = [];
 
 function add (name, content) {
-  data.push({ name: name, content: content });
+  var newID = String(data.length);
+  data.push({ name: name, content: content, uniqID: newID});
 }
 
 function list () {
@@ -39,4 +40,4 @@ for (var i = 0; i < 10; i++) {
 module.exports.add('Sara-Sunshine', 'I want cereal!');
 // // test = module.exports.find(function(item){return item.name === 'Sara-Sunshine'});
 // test = module.exports.find({name: 'Sara-Sunshine'});
-// console.log(test)
+// console.log(data)
